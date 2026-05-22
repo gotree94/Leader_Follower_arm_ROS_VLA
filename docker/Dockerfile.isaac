@@ -1,0 +1,24 @@
+FROM nvcr.io/nvidia/isaac-sim:2025.2.0
+
+# Install additional dependencies
+RUN apt-get update && apt-get install -y \
+    ros-humble-desktop \
+    ros-humble-moveit \
+    ros-humble-moveit-ros-planning-interface \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python packages
+RUN pip install --upgrade pip && \
+    pip install torch torchvision --index-url https://download.pytorch.org/whl/cu126 && \
+    pip install tensorrt onnx onnxruntime opencv-python pyyaml
+
+# Create workspace
+WORKDIR /workspace
+COPY . /workspace
+
+# Set ROS2 domain
+ENV ROS_DOMAIN_ID=42
+
+# Entrypoint
+CMD ["bash"]

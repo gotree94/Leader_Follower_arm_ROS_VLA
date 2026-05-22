@@ -1,0 +1,27 @@
+# digital_twin_config.yaml
+digital_twin:
+  monitoring_interval: 300
+  min_episodes_for_analysis: 10
+  min_cycle_interval: 3600
+  db_path: "data/episode_db.sqlite"
+  video_dir: "data/episodes"
+  max_episodes: 10000
+  
+  thresholds:
+    task_success_rate_gap: 0.15
+    grasp_success_rate_gap: 0.10
+    trajectory_smoothness_gap: 2.0
+    cycle_time_gap: 1.3
+    collision_rate_gap: 0.05
+    language_compliance_gap: 0.10
+
+  retrain:
+    lora_rank: 16
+    finetune_epochs: 10
+    learning_rate: 1.0e-4
+    num_sim_eval_trials: 100
+    num_real_validation_trials: 10
+    min_validation_success_rate: 0.85
+
+  policy_registry_path: "models/policy_registry.json"
+  model_dir: "models/vla"

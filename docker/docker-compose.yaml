@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  isaac-sim:
+    image: nvcr.io/nvidia/isaac-sim:2025.2.0
+    container_name: isaac-sim-vla
+    runtime: nvidia
+    environment:
+      - ACCEPT_EULA=Y
+      - PRIVACY_CONSENT=Y
+      - DISPLAY=${DISPLAY}
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - ROS_DOMAIN_ID=42
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ${HOME}/.cache/isaac-sim:/root/.cache:rw
+      - ./:/workspace:rw
+    network_mode: host
+    ipc: host
+    stdin_open: true
+    tty: true
